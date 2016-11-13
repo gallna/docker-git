@@ -1,0 +1,9 @@
+#!/bin/bash
+
+while read oldrev newrev ref
+do
+        #ref format /refs/tags/v1.2.3 or /refs/heads/BRANCH
+        branch=$(echo $ref | sed "s/^.*[^\/]\///");
+        echo "Ref $ref successfully received. Deploying '$branch'..."
+        git --work-tree=$WORKTREE --git-dir=/project.git checkout -f $branch
+done
